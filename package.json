@@ -1,5 +1,18 @@
 {
-  "dependencies": {
-    "cors": "^2.8.5"
-  }
+	"name": "express-extra",
+	"description": "",
+	"version": "1.0.0",
+	"main": "index.js",
+	"devDependencies": {},
+	"scripts": {
+		"install-server": "cd server && npm install",
+		"install-client": "cd client && npm install",
+		"install": "npm run install-server && npm run install-client",
+		"server": "nodemon ./server.js --prefix server",
+		"client": "npm start --prefix client",
+		"watch": "concurrently 'npm:server' 'npm:client' ",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC"
 }
