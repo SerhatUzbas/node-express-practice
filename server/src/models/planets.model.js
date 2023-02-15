@@ -1,5 +1,4 @@
 import fs from 'fs'
-import { pipeline } from 'node:stream/promises'
 import path, { dirname } from 'path'
 import { parse } from 'csv-parse'
 import { fileURLToPath } from 'url'
@@ -27,16 +26,16 @@ export const loadPlanetData = () =>
 				}
 			})
 			.on('error', (err) => {
-				console.log(err)
+				// console.log(err)
 				reject(err)
 			})
 			.on('end', () => {
-				console.log(
-					habitablePlanets.map((planet) => {
-						return planet['kepler_name']
-					})
-				)
-				console.log(`${habitablePlanets.length} habitable planets found!`)
+				// console.log(
+				// 	habitablePlanets.map((planet) => {
+				// 		return planet['kepler_name']
+				// 	})
+				// )
+				// console.log(`${habitablePlanets.length} habitable planets found!`)
 				resolve()
 			})
 	})
