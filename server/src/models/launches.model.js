@@ -1,5 +1,7 @@
 const launches = new Map()
 
+let latestFlightNumber = 100
+
 const launch = {
 	flightNumber: 33,
 	mission: 'Kepler XX',
@@ -16,4 +18,9 @@ launches.set(launch.flightNumber, launch)
 
 export const getAllLaunchesFromModal = () => {
 	return Array.from(launches.values())
+}
+
+export const addNewLaunch = (launch) => {
+	latestFlightNumber++
+	launches.set(launch.flightNumber, { ...launch, flightNumber: latestFlightNumber, customers: ['SU', 'ISU'], upcoming: true, success: true })
 }
