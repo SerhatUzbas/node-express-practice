@@ -1,4 +1,4 @@
-export const launches = new Map()
+const launches = new Map()
 
 const launch = {
 	flightNumber: 33,
@@ -13,3 +13,7 @@ const launch = {
 
 launches.set(launch.flightNumber, launch)
 // console.log(launches.get(33))
+
+export const getAllLaunchesFromModal = () => {
+	return Array.from(launches.values())
+}

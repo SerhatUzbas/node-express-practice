@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-export const habitablePlanets = []
+const habitablePlanets = []
 
 function isHabitablePlanet(planet) {
 	return planet['koi_disposition'] === 'CONFIRMED' && planet['koi_insol'] > 0.36 && planet['koi_insol'] < 1.11 && planet['koi_prad'] < 1.6
@@ -39,3 +39,7 @@ export const loadPlanetData = () =>
 				resolve()
 			})
 	})
+
+export const getAllPlanetsFromModel = () => {
+	return habitablePlanets
+}
