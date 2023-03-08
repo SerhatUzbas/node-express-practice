@@ -7,7 +7,7 @@ const launch = {
 	mission: 'Kepler XX',
 	rocket: 'Explorer XX',
 	launchDate: new Date('November 28,1993'),
-	destination: 'Kepler-442 b',
+	target: 'Kepler-442 b',
 	customer: ['SU', 'ISU'],
 	upcoming: true,
 	success: true,
@@ -22,5 +22,17 @@ export const getAllLaunchesFromModal = () => {
 
 export const addNewLaunch = (launch) => {
 	latestFlightNumber++
-	launches.set(launch.flightNumber, { ...launch, flightNumber: latestFlightNumber, customers: ['SU', 'ISU'], upcoming: true, success: true })
+	launches.set(latestFlightNumber, { ...launch, flightNumber: latestFlightNumber, customers: ['SU', 'ISU'], upcoming: true, success: true })
+}
+
+export const existLaunchWithId = (launchId) => {
+	return launches.has(launchId)
+}
+
+export const abortLaunchById = (launchId) => {
+	const aborted = launches.get(launchId)
+	console.log('kakakakakakak')
+	aborted.upcoming = false
+	aborted.success = false
+	return aborted
 }
