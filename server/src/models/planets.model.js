@@ -2,10 +2,11 @@ import fs from 'fs'
 import path, { dirname } from 'path'
 import { parse } from 'csv-parse'
 import { fileURLToPath } from 'url'
+import { Planets } from './planets.mongo.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-const habitablePlanets = []
+// const habitablePlanets = []
 
 function isHabitablePlanet(planet) {
 	return planet['koi_disposition'] === 'CONFIRMED' && planet['koi_insol'] > 0.36 && planet['koi_insol'] < 1.11 && planet['koi_prad'] < 1.6
@@ -20,26 +21,32 @@ export const loadPlanetData = () =>
 					columns: true,
 				})
 			)
-			.on('data', (data) => {
+			.on('data', async (data) => {
 				if (isHabitablePlanet(data)) {
-					habitablePlanets.push(data)
+					await savePlanet(data)
 				}
 			})
 			.on('error', (err) => {
 				// console.log(err)
 				reject(err)
 			})
-			.on('end', () => {
-				// console.log(
-				// 	habitablePlanets.map((planet) => {
-				// 		return planet['kepler_name']
-				// 	})
-				// )
-				// console.log(`${habitablePlanets.length} habitable planets found!`)
+			.on('end', async () => {
+				const planetsFounded = (await getAllPlanetsFromModel()).length
+				console.log(`${planetsFounded} habitable planets found in universe`)
+				// console.log(await getAllPlanetsFromModel())
+
 				resolve()
 			})
 	})
 
-export const getAllPlanetsFromModel = () => {
-	return habitablePlanets
+export const getAllPlanetsFromModel = async () => {
+	return await Planets.find({})
+}
+
+const savePlanet = async (planet) => {
+	try {
+		await Planets.updateOne({ kepler_name: planet.kepler_name }, { kepler_name: planet.kepler_name }, { upsert: true })
+	} catch (error) {
+		console.error('Cant get planet data')
+	}
 }
