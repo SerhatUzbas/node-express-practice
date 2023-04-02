@@ -15,8 +15,7 @@ const startServer = async () => {
 	})
 	await mongoose.connect(MONGO_URL)
 
-	// mongoose.connection.on('error', () => console.log('MongoDB error'))
-
+ 
 	await loadPlanetData()
 	server.listen(PORT, () => console.log(`${PORT} is active`))
 }

@@ -1,7 +1,7 @@
-import { abortLaunchById, addNewLaunch, existLaunchWithId, getAllLaunchesFromModal } from '../../models/launches.model.js'
+import { abortLaunchById, existLaunchWithId, getAllLaunchesFromModal, scheduleNewLaunch } from '../../models/launches.model.js'
 
-export function httpGetAllLaunches(req, res) {
-	return res.status(200).json(getAllLaunchesFromModal())
+export async function httpGetAllLaunches(req, res) {
+	return res.status(200).json(await getAllLaunchesFromModal())
 }
 
 export const httpAddNewLaunch = (req, res) => {
@@ -17,7 +17,7 @@ export const httpAddNewLaunch = (req, res) => {
 	// if (isNan(launch.launchDate)) {
 	// 	return res.status(400).json({ error: 'Invalid Date' })
 	// }
-	addNewLaunch(launch)
+	scheduleNewLaunch(launch)
 	return res.status(201).json(launch)
 }
 

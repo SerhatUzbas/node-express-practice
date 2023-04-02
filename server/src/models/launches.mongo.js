@@ -11,4 +11,4 @@ const launchesSchema = new mongoose.Schema({
 	customers: { type: [String] },
 })
 
-export const launches = mongoose.model('Launch', launchesSchema)
+export const Launches = mongoose.model('Launch', launchesSchema)

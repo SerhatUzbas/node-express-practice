@@ -40,7 +40,7 @@ export const loadPlanetData = () =>
 	})
 
 export const getAllPlanetsFromModel = async () => {
-	return await Planets.find({})
+	return await Planets.find({}, { _id: 0, __v: 0 })
 }
 
 const savePlanet = async (planet) => {
